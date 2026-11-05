@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activities · The Life Cycle of a Butterfly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#ff5fa2; --pink-soft:#ffe3ef; --navy:#2b2a6b; --purple:#8a4fd8;
+  --yellow-soft:#fff4c9; --blue-soft:#d9efff; --lav-soft:#e8defa; --green-soft:#dff5d4;
+  --orange:#f5a21b; --green:#3da34d; --text:#4a3f6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Nunito","Trebuchet MS",sans-serif; color:var(--text);
+  background:linear-gradient(180deg,#ffe9f3 0,#fff6fb 30%,#fff 60%,#fdf0f8 100%);
+  line-height:1.4;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.display{font-family:"Baloo 2","Trebuchet MS",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:18px 18px 0}
+.pic{background:rgba(255,255,255,.55);border:2px dashed rgba(138,79,216,.35);border-radius:14px;object-fit:contain}
+
+/* nav */
+.nav{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;background:#fff;border-radius:999px;padding:6px 10px;box-shadow:0 3px 10px rgba(138,79,216,.12);width:fit-content;margin-left:auto}
+.nav a{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:.95rem;color:var(--purple)}
+.nav a.active{background:var(--pink);color:#fff}
+.nav img{width:24px;height:24px;border-radius:6px}
+
+/* page header */
+.pagehead{text-align:center;margin:24px 0 6px}
+.pagehead .eyebrow{display:inline-block;background:#ffe27a;color:var(--navy);font-weight:800;padding:6px 22px;border-radius:30px;transform:rotate(-2deg);font-family:"Baloo 2",sans-serif;font-size:1.05rem;letter-spacing:.5px}
+.pagehead h1{font-size:clamp(2rem,5vw,3rem);color:var(--navy);font-weight:800;line-height:1.05;margin-top:6px}
+.pagehead h1 span{color:var(--pink);text-shadow:2px 2px 0 #fff,4px 4px 0 #ffc2dc}
+.pagehead p.intro{max-width:720px;margin:10px auto 0;font-weight:600;font-size:1.02rem}
+
+/* section titles */
+.ribbon{display:table;margin:30px auto 16px;background:#b24fc4;color:#fff;font-size:clamp(1.2rem,3.2vw,1.6rem);font-weight:800;padding:6px 30px;border-radius:14px;transform:rotate(-1.5deg)}
+
+/* activity cards */
+.activities{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.activitycard{border-radius:24px;padding:22px 20px;display:flex;flex-direction:column;gap:12px}
+.activitycard .pic{width:80px;height:80px;margin:0 auto}
+.activitycard h3{font-size:1.4rem;color:var(--navy);font-weight:800;text-align:center;line-height:1.1}
+.activitycard p.lead{font-weight:600;font-size:.96rem;text-align:center}
+.a1{background:#fde4f3}
+.a2{background:#fff0c9}
+.a3{background:#e6dcfa}
+
+/* materials box */
+.materials{background:rgba(255,255,255,.7);border-radius:16px;padding:12px 14px}
+.materials h4{font-family:"Baloo 2",sans-serif;font-size:1rem;color:var(--navy);font-weight:800;margin-bottom:6px}
+.materials ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+.materials li{font-weight:600;font-size:.9rem;padding-left:18px;position:relative}
+.materials li::before{
+  content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;border-radius:50%;
+  background:var(--purple);
+}
+
+/* steps */
+.steps{display:flex;flex-direction:column;gap:8px;counter-reset:step}
+.step{display:flex;gap:10px;align-items:flex-start;font-weight:600;font-size:.93rem}
+.step .stepnum{
+  flex:0 0 auto;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;
+  background:var(--purple);color:#fff;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:.85rem;
+}
+
+/* movement stage boxes */
+.moves{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.move{background:rgba(255,255,255,.75);border-radius:14px;padding:10px 12px;text-align:center}
+.move .move-name{font-family:"Baloo 2",sans-serif;font-weight:800;color:var(--navy);font-size:.95rem}
+.move .move-action{font-weight:600;font-size:.86rem;margin-top:2px}
+
+/* safety note */
+.safety{
+  background:#fff;border:2px dashed var(--orange);border-radius:16px;padding:10px 14px;
+  font-weight:600;font-size:.9rem;color:var(--navy);
+}
+.safety b{color:var(--orange)}
+
+/* footer */
+.footer{margin-top:34px;background:#fde4f3;border-radius:30px 30px 0 0}
+.reminderbar{display:grid;grid-template-columns:auto auto 1fr auto;gap:18px;align-items:center;padding:16px 22px}
+.reminderbar .pic{width:80px;height:80px}
+.tag{border:3px dashed var(--purple);color:var(--purple);font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.5rem;padding:6px 18px;border-radius:30px;transform:rotate(-2deg);background:#fff}
+.reminderbar p{font-weight:700;font-size:.95rem}
+.bottom{background:#a97be0;color:#fff;text-align:center;padding:12px;font-weight:700}
+
+/* responsive */
+@media(max-width:900px){
+  .activities{grid-template-columns:1fr}
+  .reminderbar{grid-template-columns:1fr;text-align:center;justify-items:center}
+}
+@media(max-width:600px){
+  .moves{grid-template-columns:1fr}
+  .nav{margin:0 auto;justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="lessons.html">Lessons</a>
+    <a href="games.html">Games</a>
+    <a href="quiz.html">Quiz</a>
+    <a class="active" href="activities.html">Activities</a>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="pagehead">
+    <span class="eyebrow">ACTIVITIES · CREATE AND EXPLORE</span>
+    <h1>Butterfly <span>Activities</span></h1>
+    <p class="intro">Get creative and do hands-on activities! Make a life cycle wheel, move like each stage, and draw a butterfly-friendly garden.</p>
+  </header>
+
+  <h2 class="ribbon">Three Activities to Try</h2>
+
+  <section class="activities">
+
+    <!-- ACTIVITY 1: Make a Life Cycle Wheel -->
+    <div class="activitycard a1">
+      <img class="pic" src="images/card-activities.png" alt="">
+      <h3>Activity 1: Make a Life Cycle Wheel</h3>
+      <p class="lead">Create a colorful wheel that shows the four stages of a butterfly's life.</p>
+
+      <div class="materials">
+        <h4>Materials</h4>
+        <ul>
+          <li>Paper or a paper plate</li>
+          <li>Crayons or colored pencils</li>
+          <li>Pencil</li>
+          <li>Scissors (ask an adult for help)</li>
+        </ul>
+      </div>
+
+      <div class="steps">
+        <div class="step"><span class="stepnum">1</span><span>Divide your paper into four sections.</span></div>
+        <div class="step"><span class="stepnum">2</span><span>Draw one stage in each section: egg, larva, pupa, and adult butterfly.</span></div>
+        <div class="step"><span class="stepnum">3</span><span>Add arrows to show the order of the stages.</span></div>
+        <div class="step"><span class="stepnum">4</span><span>Label each stage and color your life cycle wheel.</span></div>
+        <div class="step"><span class="stepnum">5</span><span>Share your wheel with a classmate and explain the changes.</span></div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY 2: Butterfly Movement Game -->
+    <div class="activitycard a2">
+      <img class="pic" src="images/card-activities.png" alt="">
+      <h3>Activity 2: Butterfly Movement Game</h3>
+      <p class="lead">Move like each stage of the butterfly life cycle!</p>
+
+      <div class="moves">
+        <div class="move">
+          <div class="move-name">Egg</div>
+          <div class="move-action">Curl up like an egg</div>
+        </div>
+        <div class="move">
+          <div class="move-name">Larva</div>
+          <div class="move-action">Wiggle gently like a caterpillar</div>
+        </div>
+        <div class="move">
+          <div class="move-name">Pupa</div>
+          <div class="move-action">Stay still like a pupa</div>
+        </div>
+        <div class="move">
+          <div class="move-name">Adult</div>
+          <div class="move-action">Slowly flap your arms like a butterfly</div>
+        </div>
+      </div>
+
+      <div class="safety">
+        <b>Safety first:</b> Move safely and keep enough space around you.
+      </div>
+    </div>
+
+    <!-- ACTIVITY 3: Draw a Butterfly-Friendly Garden -->
+    <div class="activitycard a3">
+      <img class="pic" src="images/card-activities.png" alt="">
+      <h3>Activity 3: Draw a Butterfly-Friendly Garden</h3>
+      <p class="lead">Design a garden where butterflies can live and visit.</p>
+
+      <div class="steps">
+        <div class="step"><span class="stepnum">1</span><span>Draw a garden with flowers and suitable plants.</span></div>
+        <div class="step"><span class="stepnum">2</span><span>Add a butterfly visiting a flower.</span></div>
+        <div class="step"><span class="stepnum">3</span><span>Label two ways people can care for butterflies and their habitat.</span></div>
+      </div>
+
+      <div class="safety">
+        <b>Think about:</b> What plants do caterpillars need? What flowers do adult butterflies like?
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="reminderbar">
+      <img class="pic" src="images/footer-butterfly.png" alt="">
+      <span class="tag">Reminder:</span>
+      <p>"Be kind to nature. Butterflies remind us that even the smallest changes can make a big difference!"</p>
+    </div>
+    <div class="bottom">Little steps. Big change. A healthier planet for tomorrow!</div>
+  </footer>
+
+</div>
+</body>
+</html>

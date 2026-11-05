@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Games · The Life Cycle of a Butterfly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#ff5fa2; --pink-soft:#ffe3ef; --navy:#2b2a6b; --purple:#8a4fd8;
+  --yellow-soft:#fff4c9; --blue-soft:#d9efff; --lav-soft:#e8defa; --green-soft:#dff5d4;
+  --orange:#f5a21b; --green:#3da34d; --text:#4a3f6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Nunito","Trebuchet MS",sans-serif; color:var(--text);
+  background:linear-gradient(180deg,#ffe9f3 0,#fff6fb 30%,#fff 60%,#fdf0f8 100%);
+  line-height:1.4;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.display{font-family:"Baloo 2","Trebuchet MS",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:18px 18px 0}
+.pic{background:rgba(255,255,255,.55);border:2px dashed rgba(138,79,216,.35);border-radius:14px;object-fit:contain}
+
+/* nav */
+.nav{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;background:#fff;border-radius:999px;padding:6px 10px;box-shadow:0 3px 10px rgba(138,79,216,.12);width:fit-content;margin-left:auto}
+.nav a{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:.95rem;color:var(--purple)}
+.nav a.active{background:var(--pink);color:#fff}
+.nav img{width:24px;height:24px;border-radius:6px}
+
+/* page header */
+.pagehead{text-align:center;margin:24px 0 6px}
+.pagehead .eyebrow{display:inline-block;background:#ffe27a;color:var(--navy);font-weight:800;padding:6px 22px;border-radius:30px;transform:rotate(-2deg);font-family:"Baloo 2",sans-serif;font-size:1.05rem;letter-spacing:.5px}
+.pagehead h1{font-size:clamp(2rem,5vw,3rem);color:var(--navy);font-weight:800;line-height:1.05;margin-top:6px}
+.pagehead h1 span{color:var(--pink);text-shadow:2px 2px 0 #fff,4px 4px 0 #ffc2dc}
+.pagehead p.intro{max-width:720px;margin:10px auto 0;font-weight:600;font-size:1.02rem}
+
+/* section titles */
+.ribbon{display:table;margin:30px auto 16px;background:#b24fc4;color:#fff;font-size:clamp(1.2rem,3.2vw,1.6rem);font-weight:800;padding:6px 30px;border-radius:14px;transform:rotate(-1.5deg)}
+
+/* game cards */
+.games{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.gamecard{border-radius:24px;padding:22px 20px;display:flex;flex-direction:column;gap:12px}
+.gamecard .pic{width:80px;height:80px;margin:0 auto}
+.gamecard h3{font-size:1.4rem;color:var(--navy);font-weight:800;text-align:center;line-height:1.1}
+.gamecard p{font-weight:600;font-size:.96rem;text-align:center}
+.g1{background:#fde4f3}.g2{background:#fff0c9}.g3{background:#e6dcfa}
+
+/* buttons */
+.btn{
+  display:block;width:100%;color:#fff;font-weight:800;
+  padding:10px;border-radius:30px;border:none;font-size:.98rem;cursor:pointer;
+  font-family:"Nunito",sans-serif;transition:transform .15s ease,box-shadow .15s ease;
+}
+.btn:hover,.btn:focus-visible{transform:translateY(-2px);box-shadow:0 8px 16px rgba(138,79,216,.25);outline:none}
+.btn.pink{background:var(--pink)}
+.btn.purple{background:var(--purple)}
+.btn.green{background:var(--green)}
+.btn.small{font-size:.85rem;padding:6px 12px;width:auto;border-radius:20px}
+
+/* ---- Game 1: order game ---- */
+.wordcards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;min-height:48px}
+.wordcard{
+  background:#fff;border:2px solid var(--purple);color:var(--navy);
+  font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.05rem;
+  padding:9px 18px;border-radius:30px;cursor:pointer;user-select:none;
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+.wordcard:hover{transform:translateY(-3px);box-shadow:0 6px 14px rgba(138,79,216,.2)}
+.wordcard.placed{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+.order-zone{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;min-height:56px;background:rgba(255,255,255,.6);border:2px dashed var(--purple);border-radius:16px;padding:10px}
+.order-zone .slot{
+  width:46px;height:46px;border-radius:12px;background:#fff;border:2px dashed rgba(138,79,216,.4);
+  display:grid;place-items:center;font-family:"Baloo 2",sans-serif;font-weight:800;color:var(--purple);
+  font-size:1.1rem;cursor:pointer;
+}
+.order-zone .slot.filled{padding:0;border-style:solid;border-color:var(--purple);background:var(--purple);color:#fff}
+
+.feedback{font-weight:700;text-align:center;min-height:24px;font-size:.92rem}
+.feedback.good{color:var(--green)}
+.feedback.bad{color:#c4237a}
+
+/* ---- Game 2: who am i ---- */
+.clues{display:flex;flex-direction:column;gap:10px}
+.clue{background:rgba(255,255,255,.75);border-radius:16px;padding:12px 14px;font-weight:600;font-size:.95rem}
+.clue b{color:var(--navy)}
+.clue .row{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
+.clue input{
+  flex:1;min-width:120px;padding:8px 12px;border:2px solid rgba(138,79,216,.35);
+  border-radius:20px;font-family:"Nunito",sans-serif;font-weight:600;font-size:.9rem;color:var(--text);
+  outline:none;
+}
+.clue input:focus{border-color:var(--purple)}
+.clue .result{font-size:.85rem;font-weight:800;min-height:18px}
+.clue .result.correct{color:var(--green)}
+.clue .result.wrong{color:#c4237a}
+
+/* ---- Game 3: match-up ---- */
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.matchcol{display:flex;flex-direction:column;gap:8px}
+.matchitem{
+  background:#fff;border:2px solid rgba(138,79,216,.3);border-radius:14px;
+  padding:10px 12px;font-weight:700;font-size:.92rem;cursor:pointer;
+  transition:background .12s ease,border-color .12s ease;
+}
+.matchitem:hover{border-color:var(--purple)}
+.matchitem.selected{background:var(--yellow-soft);border-color:var(--orange)}
+.matchitem.matched{background:var(--green-soft);border-color:var(--green);cursor:default}
+.matchitem.wrong{background:#ffd6e6;border-color:#c4237a}
+.matchcol.right .matchitem{font-weight:600;font-size:.88rem}
+
+/* footer */
+.footer{margin-top:34px;background:#fde4f3;border-radius:30px 30px 0 0}
+.reminderbar{display:grid;grid-template-columns:auto auto 1fr auto;gap:18px;align-items:center;padding:16px 22px}
+.reminderbar .pic{width:80px;height:80px}
+.tag{border:3px dashed var(--purple);color:var(--purple);font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.5rem;padding:6px 18px;border-radius:30px;transform:rotate(-2deg);background:#fff}
+.reminderbar p{font-weight:700;font-size:.95rem}
+.bottom{background:#a97be0;color:#fff;text-align:center;padding:12px;font-weight:700}
+
+/* responsive */
+@media(max-width:900px){
+  .games{grid-template-columns:1fr}
+  .reminderbar{grid-template-columns:1fr;text-align:center;justify-items:center}
+}
+@media(max-width:600px){
+  .matchgrid{grid-template-columns:1fr}
+  .nav{margin:0 auto;justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="lessons.html">Lessons</a>
+    <a class="active" href="games.html">Games</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="activities.html">Activities</a>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="pagehead">
+    <span class="eyebrow">GAMES · PLAY AND LEARN</span>
+    <h1>Butterfly <span>Games</span></h1>
+    <p class="intro">Play these fun games to practice what you know about the butterfly life cycle. Tap the cards, type your guesses, and make your matches!</p>
+  </header>
+
+  <h2 class="ribbon">Three Games to Try</h2>
+
+  <section class="games">
+
+    <!-- GAME 1: Put the Stages in Order -->
+    <div class="gamecard g1">
+      <img class="pic" src="images/card-games.png" alt="">
+      <h3>Game 1: Put the Stages in Order</h3>
+      <p>Tap a word card to put it in the next slot. Tap a card in a slot to send it back.</p>
+
+      <div class="wordcards" id="wordcards">
+        <button class="wordcard" data-stage="adult" type="button">Adult</button>
+        <button class="wordcard" data-stage="egg" type="button">Egg</button>
+        <button class="wordcard" data-stage="pupa" type="button">Pupa</button>
+        <button class="wordcard" data-stage="larva" type="button">Larva</button>
+      </div>
+
+      <div class="order-zone" id="orderzone">
+        <div class="slot" data-index="0">1</div>
+        <div class="slot" data-index="1">2</div>
+        <div class="slot" data-index="2">3</div>
+        <div class="slot" data-index="3">4</div>
+      </div>
+
+      <button class="btn pink" id="checkOrder" type="button">Check My Order</button>
+      <button class="btn purple small" id="resetOrder" type="button" style="margin:0 auto;">Reset</button>
+      <div class="feedback" id="orderFeedback"></div>
+      <p style="font-size:.85rem;text-align:center;font-weight:600;">Challenge: Write the correct order in your notebook, too!</p>
+    </div>
+
+    <!-- GAME 2: Who Am I? -->
+    <div class="gamecard g2">
+      <img class="pic" src="images/card-games.png" alt="">
+      <h3>Game 2: Who Am I?</h3>
+      <p>Read each clue and type your guess. Then tap Check!</p>
+
+      <div class="clues">
+        <div class="clue">
+          <span><b>Clue 1:</b> I am tiny and can be found on a plant. What am I?</span>
+          <div class="row">
+            <input type="text" placeholder="Your answer..." data-answer="egg">
+            <button class="btn purple small check-clue" type="button">Check</button>
+          </div>
+          <div class="result"></div>
+        </div>
+        <div class="clue">
+          <span><b>Clue 2:</b> I have a long body, many legs, and I eat leaves. What am I?</span>
+          <div class="row">
+            <input type="text" placeholder="Your answer..." data-answer="larva">
+            <button class="btn purple small check-clue" type="button">Check</button>
+          </div>
+          <div class="result"></div>
+        </div>
+        <div class="clue">
+          <span><b>Clue 3:</b> I am the stage when the insect changes inside a protective covering. What am I?</span>
+          <div class="row">
+            <input type="text" placeholder="Your answer..." data-answer="pupa">
+            <button class="btn purple small check-clue" type="button">Check</button>
+          </div>
+          <div class="result"></div>
+        </div>
+        <div class="clue">
+          <span><b>Clue 4:</b> I have wings and can visit flowers. What am I?</span>
+          <div class="row">
+            <input type="text" placeholder="Your answer..." data-answer="adult">
+            <button class="btn purple small check-clue" type="button">Check</button>
+          </div>
+          <div class="result"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME 3: Butterfly Match-Up -->
+    <div class="gamecard g3">
+      <img class="pic" src="images/card-games.png" alt="">
+      <h3>Game 3: Butterfly Match-Up</h3>
+      <p>Tap a word on the left, then tap its description on the right. Check your matches when you're done!</p>
+
+      <div class="matchgrid">
+        <div class="matchcol left" id="matchLeft">
+          <button class="matchitem" data-word="egg" type="button">Egg</button>
+          <button class="matchitem" data-word="larva" type="button">Larva</button>
+          <button class="matchitem" data-word="pupa" type="button">Pupa</button>
+          <button class="matchitem" data-word="adult" type="button">Adult</button>
+        </div>
+        <div class="matchcol right" id="matchRight">
+          <button class="matchitem" data-desc="adult" type="button">A. The stage that comes out of the chrysalis</button>
+          <button class="matchitem" data-desc="egg" type="button">B. A tiny beginning of the butterfly’s life</button>
+          <button class="matchitem" data-desc="larva" type="button">C. The caterpillar stage</button>
+          <button class="matchitem" data-desc="pupa" type="button">D. The changing stage inside the chrysalis</button>
+        </div>
+      </div>
+
+      <button class="btn green" id="checkMatch" type="button">Check My Matches</button>
+      <button class="btn purple small" id="resetMatch" type="button" style="margin:0 auto;">Reset</button>
+      <div class="feedback" id="matchFeedback"></div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="reminderbar">
+      <img class="pic" src="images/footer-butterfly.png" alt="">
+      <span class="tag">Reminder:</span>
+      <p>"Be kind to nature. Butterflies remind us that even the smallest changes can make a big difference!"</p>
+    </div>
+    <div class="bottom">Little steps. Big change. A healthier planet for tomorrow!</div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- GAME 1: Put the Stages in Order ---------- */
+(function () {
+  const wordcards = [...document.querySelectorAll('#wordcards .wordcard')];
+  const orderzone = document.getElementById('orderzone');
+  const slots = [...orderzone.querySelectorAll('.slot')];
+  const checkBtn = document.getElementById('checkOrder');
+  const resetBtn = document.getElementById('resetOrder');
+  const feedback = document.getElementById('orderFeedback');
+  const correctOrder = ['egg', 'larva', 'pupa', 'adult'];
+
+  function clearSlots() {
+    slots.forEach((slot, i) => {
+      slot.textContent = String(i + 1);
+      slot.classList.remove('filled');
+      slot.dataset.stage = '';
+    });
+  }
+
+  function refreshCardState() {
+    const placedStages = slots.map(s => s.dataset.stage).filter(Boolean);
+    wordcards.forEach(card => {
+      card.disabled = placedStages.includes(card.dataset.stage);
+      card.classList.toggle('placed', placedStages.includes(card.dataset.stage));
+    });
+  }
+
+  function nextEmptySlot() {
+    return slots.find(s => !s.dataset.stage);
+  }
+
+  wordcards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.disabled) return;
+      const slot = nextEmptySlot();
+      if (!slot) {
+        feedback.textContent = 'All four slots are full. Tap a slot to remove a card.';
+        feedback.className = 'feedback bad';
+        return;
+      }
+      slot.textContent = card.textContent;
+      slot.dataset.stage = card.dataset.stage;
+      slot.classList.add('filled');
+      feedback.textContent = '';
+      refreshCardState();
+    });
+  });
+
+  slots.forEach(slot => {
+    slot.addEventListener('click', () => {
+      if (!slot.dataset.stage) return;
+      slot.textContent = String(Number(slot.dataset.index) + 1);
+      slot.dataset.stage = '';
+      slot.classList.remove('filled');
+      feedback.textContent = '';
+      refreshCardState();
+    });
+  });
+
+  checkBtn.addEventListener('click', () => {
+    const placedStages = slots.map(s => s.dataset.stage);
+    if (placedStages.some(s => !s)) {
+      feedback.textContent = 'Fill all four slots first!';
+      feedback.className = 'feedback bad';
+      return;
+    }
+    const isCorrect = placedStages.every((s, i) => s === correctOrder[i]);
+    if (isCorrect) {
+      feedback.textContent = 'Correct! Egg → Larva → Pupa → Adult Butterfly';
+      feedback.className = 'feedback good';
+    } else {
+      feedback.textContent = 'Not quite — try again!';
+      feedback.className = 'feedback bad';
+    }
+  });
+
+  resetBtn.addEventListener('click', () => {
+    clearSlots();
+    refreshCardState();
+    feedback.textContent = '';
+    feedback.className = 'feedback';
+  });
+
+  refreshCardState();
+})();
+
+/* ---------- GAME 2: Who Am I? ---------- */
+(function () {
+  const answers = {
+    egg: ['egg', 'eggs'],
+    larva: ['larva', 'caterpillar'],
+    pupa: ['pupa', 'chrysalis'],
+    adult: ['adult', 'butterfly', 'adult butterfly']
+  };
+
+  document.querySelectorAll('.clue').forEach(clue => {
+    const input = clue.querySelector('input');
+    const checkBtn = clue.querySelector('.check-clue');
+    const result = clue.querySelector('.result');
+    const answerKey = input.dataset.answer;
+
+    function check() {
+      const value = input.value.trim().toLowerCase();
+      if (!value) {
+        result.textContent = 'Type an answer first.';
+        result.className = 'result wrong';
+        return;
+      }
+      const valid = answers[answerKey];
+      if (valid.includes(value)) {
+        result.textContent = 'Correct!';
+        result.className = 'result correct';
+        input.disabled = true;
+        checkBtn.disabled = true;
+        checkBtn.textContent = 'Done';
+      } else {
+        result.textContent = 'Try again!';
+        result.className = 'result wrong';
+      }
+    }
+
+    checkBtn.addEventListener('click', check);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') check();
+    });
+  });
+})();
+
+/* ---------- GAME 3: Butterfly Match-Up ---------- */
+(function () {
+  const leftItems = [...document.querySelectorAll('#matchLeft .matchitem')];
+  const rightItems = [...document.querySelectorAll('#matchRight .matchitem')];
+  const checkBtn = document.getElementById('checkMatch');
+  const resetBtn = document.getElementById('resetMatch');
+  const feedback = document.getElementById('matchFeedback');
+
+  let selectedLeft = null;
+  let matches = {}; // word -> rightEl
+
+  function clearSelection() {
+    leftItems.forEach(i => i.classList.remove('selected'));
+    selectedLeft = null;
+  }
+
+  function clearMarks() {
+    leftItems.forEach(i => i.classList.remove('matched', 'wrong', 'selected'));
+    rightItems.forEach(i => i.classList.remove('matched', 'wrong'));
+    matches = {};
+    clearSelection();
+  }
+
+  leftItems.forEach(item => {
+    item.addEventListener('click', () => {
+      clearSelection();
+      item.classList.add('selected');
+      selectedLeft = item;
+    });
+  });
+
+  rightItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (!selectedLeft) {
+        feedback.textContent = 'Pick a word on the left first.';
+        feedback.className = 'feedback bad';
+        return;
+      }
+      // if this description was already matched to another word, remove that pair
+      Object.keys(matches).forEach(word => {
+        if (matches[word] === item) {
+          delete matches[word];
+          const oldLeft = leftItems.find(l => l.dataset.word === word);
+          if (oldLeft) oldLeft.classList.remove('matched');
+          item.classList.remove('matched');
+        }
+      });
+      // also, if this word was already matched elsewhere, drop that pair
+      if (matches[selectedLeft.dataset.word]) {
+        const oldRight = matches[selectedLeft.dataset.word];
+        oldRight.classList.remove('matched');
+      }
+      matches[selectedLeft.dataset.word] = item;
+      selectedLeft.classList.remove('selected');
+      selectedLeft.classList.add('matched');
+      item.classList.add('matched');
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+      clearSelection();
+    });
+  });
+
+  checkBtn.addEventListener('click', () => {
+    const words = leftItems.map(l => l.dataset.word);
+    const allMatched = words.every(w => matches[w]);
+    if (!allMatched) {
+      feedback.textContent = 'Match all four words first!';
+      feedback.className = 'feedback bad';
+      return;
+    }
+    let correct = 0;
+    words.forEach(word => {
+      const rightEl = matches[word];
+      const leftEl = leftItems.find(l => l.dataset.word === word);
+      if (rightEl.dataset.desc === word) {
+        correct++;
+        rightEl.classList.remove('wrong');
+        rightEl.classList.add('matched');
+        leftEl.classList.remove('wrong');
+        leftEl.classList.add('matched');
+      } else {
+        rightEl.classList.remove('matched');
+        rightEl.classList.add('wrong');
+        leftEl.classList.remove('matched');
+        leftEl.classList.add('wrong');
+      }
+    });
+    if (correct === 4) {
+      feedback.textContent = 'All four matches are correct!';
+      feedback.className = 'feedback good';
+    } else {
+      feedback.textContent = correct + ' out of 4 correct. Fix the red ones and try again!';
+      feedback.className = 'feedback bad';
+    }
+  });
+
+  resetBtn.addEventListener('click', () => {
+    clearMarks();
+    feedback.textContent = '';
+    feedback.className = 'feedback';
+  });
+})();
+</script>
+</body>
+</html>

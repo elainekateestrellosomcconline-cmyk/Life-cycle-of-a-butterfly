@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life Cycle of a Butterfly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#ff5fa2; --pink-soft:#ffe3ef; --navy:#2b2a6b; --purple:#8a4fd8;
+  --yellow-soft:#fff4c9; --blue-soft:#d9efff; --lav-soft:#e8defa; --green-soft:#dff5d4;
+  --orange:#f5a21b; --green:#3da34d; --text:#4a3f6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Nunito","Trebuchet MS",sans-serif; color:var(--text);
+  background:linear-gradient(180deg,#ffe9f3 0,#fff6fb 30%,#fff 60%,#fdf0f8 100%);
+  line-height:1.4;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.display{font-family:"Baloo 2","Trebuchet MS",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:18px 18px 0}
+
+/* placeholder look for every picture slot */
+.pic{background:rgba(255,255,255,.55);border:2px dashed rgba(138,79,216,.35);border-radius:14px;object-fit:contain}
+
+/* top nav */
+.nav{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;background:#fff;border-radius:999px;padding:6px 10px;box-shadow:0 3px 10px rgba(138,79,216,.12);width:fit-content;margin-left:auto}
+.nav a{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:.95rem;color:var(--purple)}
+.nav a.active{background:var(--pink);color:#fff}
+.nav img{width:24px;height:24px;border-radius:6px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:10px;align-items:center;margin-top:6px}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);color:var(--navy);font-weight:800;line-height:1}
+.hero h1 span{display:block;font-size:clamp(3rem,10vw,6rem);color:var(--pink);letter-spacing:1px;text-shadow:3px 3px 0 #fff,5px 5px 0 #ffc2dc}
+.tagline{display:inline-block;margin-top:10px;background:#ffe27a;padding:10px 26px;border-radius:40px 60px 40px 60px;transform:rotate(-3deg);font-weight:700;color:var(--navy)}
+.hero-img{width:100%;aspect-ratio:1/1;max-width:340px;margin-left:auto}
+
+/* section titles */
+.ribbon{display:table;margin:26px auto 16px;background:#b24fc4;color:#fff;font-size:clamp(1.3rem,3.5vw,1.9rem);font-weight:800;padding:6px 34px;border-radius:14px;transform:rotate(-1.5deg)}
+.title-plain{text-align:center;font-size:clamp(1.6rem,4vw,2.3rem);color:var(--navy);margin:30px 0 14px;font-weight:800}
+
+/* life cycle row */
+.cycle{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:8px}
+.stage{border-radius:24px;padding:14px;text-align:center}
+.stage .pic{width:100%;aspect-ratio:1/1}
+.stage p{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;font-family:"Baloo 2",sans-serif;font-size:1.5rem;font-weight:800;color:var(--navy)}
+.num{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;color:#fff;font-size:1.3rem}
+.s1{background:var(--yellow-soft)}.s1 .num{background:var(--pink)}
+.s2{background:var(--blue-soft)}.s2 .num{background:var(--orange)}
+.s3{background:var(--lav-soft)}.s3 .num{background:var(--purple)}
+.s4{background:var(--pink-soft)}.s4 .num{background:var(--green)}
+.arrow{width:28px;height:28px;color:var(--purple)}
+
+/* fun facts */
+.facts{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.fact{border-radius:20px;padding:14px 10px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.fact .pic{width:64px;height:64px}
+.fact h3{font-size:1rem;line-height:1.15;padding:8px 10px;border-radius:30px;background:rgba(255,255,255,.7);color:var(--navy);font-weight:700}
+.fact p{font-size:.95rem;font-weight:600}
+.f1{background:#ffe0ee}.f2{background:#fff3c4}.f3{background:#e6dcfa}.f4{background:#dcf5d2}.f5{background:#d6edff}
+
+/* link cards */
+.links{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+.card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;border-radius:22px;padding:16px 12px 14px;transition:transform .15s ease,box-shadow .15s ease}
+.card:hover,.card:focus-visible{transform:translateY(-5px);box-shadow:0 10px 20px rgba(138,79,216,.2);outline:none}
+.card:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
+.card .pic{width:96px;height:96px}
+.card h3{font-size:1.7rem;font-weight:800;line-height:1}
+.card p{font-size:.95rem;font-weight:600;flex:1}
+.btn{display:block;width:100%;color:#fff;font-weight:800;padding:8px 10px;border-radius:30px;font-size:.95rem}
+.btn svg{width:14px;height:14px;vertical-align:-2px;margin-left:4px}
+.c1{background:#fde4f3}.c1 h3{color:#b0307f}.c1 .btn{background:#ff5fa2}
+.c2{background:#fff0c9}.c2 h3{color:var(--orange)}.c2 .btn{background:var(--orange)}
+.c3{background:#e6dcfa}.c3 h3{color:#5b34b3}.c3 .btn{background:#7b4fd8}
+.c4{background:#dcf5d2}.c4 h3{color:var(--green)}.c4 .btn{background:var(--green)}
+.c5{background:#ffe0ee}.c5 h3{color:#c4237a}.c5 .btn{background:#ee4f94}
+
+/* footer */
+.footer{margin-top:30px;background:#fde4f3;border-radius:30px 30px 0 0}
+.reminder{display:grid;grid-template-columns:auto auto 1fr auto;gap:18px;align-items:center;padding:16px 22px}
+.reminder .pic{width:90px;height:90px}
+.tag{border:3px dashed var(--purple);color:var(--purple);font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.7rem;padding:8px 20px;border-radius:30px;transform:rotate(-2deg);background:#fff}
+.reminder p{font-weight:700}
+.sign{width:100px;height:100px}
+.bottom{background:#a97be0;color:#fff;text-align:center;padding:12px;font-weight:700}
+
+/* responsive */
+@media(max-width:900px){
+  .facts,.links{grid-template-columns:repeat(2,1fr)}
+  .facts .fact:last-child,.links .card:last-child{grid-column:1/-1}
+  .cycle{grid-template-columns:1fr 1fr}
+  .arrow{display:none}
+  .reminder{grid-template-columns:1fr;text-align:center;justify-items:center}
+}
+@media(max-width:600px){
+  .hero{grid-template-columns:1fr}
+  .hero-img{margin:0 auto}
+  .nav{margin:0 auto;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main">
+    <a class="active" href="index.html">Home</a>
+    <a href="lessons.html">Lessons</a>
+    <a href="games.html">Games</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="activities.html">Activities</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <h1>The Life Cycle of a <span>BUTTERFLY</span></h1>
+      <p class="tagline">Small changes... make a big transformation!</p>
+    </div>
+    <img class="pic hero-img" src="images/hero-butterfly.png" alt="Smiling orange butterfly">
+  </header>
+
+  <!-- 4 CYCLES -->
+  <h2 class="ribbon">The 4 Cycles of a Butterfly</h2>
+  <section class="cycle">
+    <div class="stage s1">
+      <img class="pic" src="images/stage-egg.png" alt="Eggs on a leaf">
+      <p><span class="num">1</span>Egg</p>
+    </div>
+    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg>
+    <div class="stage s2">
+      <img class="pic" src="images/stage-larva.png" alt="Caterpillar on a leaf">
+      <p><span class="num">2</span>Larva</p>
+    </div>
+    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg>
+    <div class="stage s3">
+      <img class="pic" src="images/stage-pupa.png" alt="Chrysalis hanging from a branch">
+      <p><span class="num">3</span>Pupa</p>
+    </div>
+    <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg>
+    <div class="stage s4">
+      <img class="pic" src="images/stage-adult.png" alt="Adult butterfly">
+      <p><span class="num">4</span>Adult</p>
+    </div>
+  </section>
+
+  <!-- FUN FACTS -->
+  <h2 class="title-plain">Fun Butterfly Facts!</h2>
+  <section class="facts">
+    <div class="fact f1">
+      <img class="pic" src="images/fact-did-you-know.png" alt="">
+      <h3>Did You Know?</h3>
+      <p>Butterflies taste with their feet!</p>
+    </div>
+    <div class="fact f2">
+      <img class="pic" src="images/fact-lifespan.png" alt="">
+      <h3>How Long Do Butterflies Live?</h3>
+      <p>Usually 2 weeks to 1 month (except for some species).</p>
+    </div>
+    <div class="fact f3">
+      <img class="pic" src="images/fact-food.png" alt="">
+      <h3>How Do Butterflies Find Food?</h3>
+      <p>They find nectar with their long tongues!</p>
+    </div>
+    <div class="fact f4">
+      <img class="pic" src="images/fact-leaves.png" alt="">
+      <h3>Caterpillars Eat Leaves!</h3>
+      <p>They eat lots of leaves to grow!</p>
+    </div>
+    <div class="fact f5">
+      <img class="pic" src="images/fact-flowers.png" alt="">
+      <h3>Butterflies Help Flowers Grow</h3>
+      <p>They pollinate flowers and help nature!</p>
+    </div>
+  </section>
+
+  <!-- LINK CARDS -->
+  <section class="links">
+    <a class="card c1" href="lessons.html">
+      <img class="pic" src="images/card-lessons.png" alt="">
+      <h3>Lessons</h3>
+      <p>Learn about the life cycle, parts, and importance of butterflies!</p>
+      <span class="btn">Go to Lessons <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span>
+    </a>
+    <a class="card c2" href="games.html">
+      <img class="pic" src="images/card-games.png" alt="">
+      <h3>Games</h3>
+      <p>Play fun games and test what you know!</p>
+      <span class="btn">Play Games <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span>
+    </a>
+    <a class="card c3" href="quiz.html">
+      <img class="pic" src="images/card-quiz.png" alt="">
+      <h3>Quiz</h3>
+      <p>Check what you have learned!</p>
+      <span class="btn">Take Quiz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span>
+    </a>
+    <a class="card c4" href="activities.html">
+      <img class="pic" src="images/card-activities.png" alt="">
+      <h3>Activities</h3>
+      <p>Get creative and do hands-on activities!</p>
+      <span class="btn">Start Activities <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span>
+    </a>
+    <a class="card c5" href="importance.html">
+      <img class="pic" src="images/card-importance.png" alt="">
+      <h3>Its Importance</h3>
+      <p>They keep nature healthy and beautiful!</p>
+      <span class="btn">Learn More <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg></span>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="reminder">
+      <img class="pic" src="images/footer-butterfly.png" alt="">
+      <span class="tag">Reminder:</span>
+      <p>"Be kind to nature. Butterflies remind us that even the smallest changes can make a big difference!"</p>
+    </div>
+    <div class="bottom">Little steps. Big change. A healthier planet for tomorrow!</div>
+  </footer>
+
+</div>
+</body>
+</html>

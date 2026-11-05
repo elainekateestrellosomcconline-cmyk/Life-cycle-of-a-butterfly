@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Its Importance · The Life Cycle of a Butterfly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#ff5fa2; --pink-soft:#ffe3ef; --navy:#2b2a6b; --purple:#8a4fd8;
+  --yellow-soft:#fff4c9; --blue-soft:#d9efff; --lav-soft:#e8defa; --green-soft:#dff5d4;
+  --orange:#f5a21b; --green:#3da34d; --text:#4a3f6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Nunito","Trebuchet MS",sans-serif; color:var(--text);
+  background:linear-gradient(180deg,#ffe9f3 0,#fff6fb 30%,#fff 60%,#fdf0f8 100%);
+  line-height:1.4;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.display{font-family:"Baloo 2","Trebuchet MS",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:18px 18px 0}
+.pic{background:rgba(255,255,255,.55);border:2px dashed rgba(138,79,216,.35);border-radius:14px;object-fit:contain}
+
+/* nav */
+.nav{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;background:#fff;border-radius:999px;padding:6px 10px;box-shadow:0 3px 10px rgba(138,79,216,.12);width:fit-content;margin-left:auto}
+.nav a{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:.95rem;color:var(--purple)}
+.nav a.active{background:var(--pink);color:#fff}
+.nav img{width:24px;height:24px;border-radius:6px}
+
+/* page header */
+.pagehead{text-align:center;margin:24px 0 6px}
+.pagehead .eyebrow{display:inline-block;background:#ffe27a;color:var(--navy);font-weight:800;padding:6px 22px;border-radius:30px;transform:rotate(-2deg);font-family:"Baloo 2",sans-serif;font-size:1.05rem;letter-spacing:.5px}
+.pagehead h1{font-size:clamp(2rem,5vw,3rem);color:var(--navy);font-weight:800;line-height:1.05;margin-top:6px}
+.pagehead h1 span{color:var(--pink);text-shadow:2px 2px 0 #fff,4px 4px 0 #ffc2dc}
+.pagehead p.intro{max-width:720px;margin:10px auto 0;font-weight:600;font-size:1.02rem}
+
+/* section titles */
+.ribbon{display:table;margin:30px auto 16px;background:#b24fc4;color:#fff;font-size:clamp(1.2rem,3.2vw,1.6rem);font-weight:800;padding:6px 30px;border-radius:14px;transform:rotate(-1.5deg)}
+
+/* intro banner */
+.introbanner{
+  display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;
+  background:#dcf5d2;border-radius:24px;padding:20px 24px;margin-bottom:4px;
+}
+.introbanner .pic{width:90px;height:90px}
+.introbanner p{font-weight:700;font-size:1.02rem}
+
+/* importance cards */
+.reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.reason{border-radius:24px;padding:20px 22px;display:flex;gap:14px;align-items:flex-start}
+.reason .badge{
+  flex:0 0 auto;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;
+  font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.2rem;color:#fff;
+}
+.reason h3{font-size:1.25rem;color:var(--navy);font-weight:800;line-height:1.15;margin-bottom:4px}
+.reason p{font-weight:600;font-size:.96rem}
+.r1{background:#d6edff} .r1 .badge{background:#3a8fd8}
+.r2{background:#fff3c4} .r2 .badge{background:var(--orange)}
+.r3{background:#e6dcfa} .r3 .badge{background:var(--purple)}
+.r4{background:#dcf5d2} .r4 .badge{background:var(--green)}
+
+/* protect box */
+.protect{
+  background:#fde4f3;border-radius:24px;padding:20px 24px;margin-top:20px;
+  display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;
+}
+.protect .pic{width:80px;height:80px}
+.protect h3{color:#b0307f;font-size:1.4rem;font-weight:800;margin-bottom:4px}
+.protect p{font-weight:600}
+
+/* reminders */
+.reminders{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.reminder{border-radius:20px;padding:16px 16px;display:flex;gap:12px;align-items:flex-start;background:#fff;box-shadow:0 4px 12px rgba(138,79,216,.08)}
+.reminder .num{
+  flex:0 0 auto;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;
+  background:var(--pink);color:#fff;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1rem;
+}
+.reminder p{font-weight:600;font-size:.94rem}
+
+/* big reminder */
+.bigreminder{
+  margin-top:22px;background:#e6dcfa;border-radius:24px;padding:22px 24px;text-align:center;
+}
+.bigreminder .tag2{
+  display:inline-block;border:3px dashed var(--purple);color:var(--purple);
+  font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.2rem;
+  padding:4px 18px;border-radius:30px;background:#fff;transform:rotate(-2deg);margin-bottom:10px;
+}
+.bigreminder p{font-weight:700;font-size:1.05rem;max-width:640px;margin:0 auto}
+
+/* footer */
+.footer{margin-top:34px;background:#fde4f3;border-radius:30px 30px 0 0}
+.reminderbar{display:grid;grid-template-columns:auto auto 1fr auto;gap:18px;align-items:center;padding:16px 22px}
+.reminderbar .pic{width:80px;height:80px}
+.tag{border:3px dashed var(--purple);color:var(--purple);font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.5rem;padding:6px 18px;border-radius:30px;transform:rotate(-2deg);background:#fff}
+.reminderbar p{font-weight:700;font-size:.95rem}
+.bottom{background:#a97be0;color:#fff;text-align:center;padding:12px;font-weight:700}
+
+/* responsive */
+@media(max-width:900px){
+  .reasons{grid-template-columns:1fr}
+  .reminders{grid-template-columns:1fr 1fr}
+  .introbanner,.protect{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .reminderbar{grid-template-columns:1fr;text-align:center;justify-items:center}
+}
+@media(max-width:600px){
+  .reminders{grid-template-columns:1fr}
+  .nav{margin:0 auto;justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="lessons.html">Lessons</a>
+    <a href="games.html">Games</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="activities.html">Activities</a>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="pagehead">
+    <span class="eyebrow">ITS IMPORTANCE · WHY ARE BUTTERFLIES IMPORTANT?</span>
+    <h1>More Than Just <span>Beautiful</span></h1>
+    <p class="intro">Butterflies are more than beautiful insects. They are part of nature and help keep ecosystems healthy.</p>
+  </header>
+
+  <!-- INTRO BANNER -->
+  <div class="introbanner">
+    <img class="pic" src="images/card-importance.png" alt="">
+    <p>From pollinating flowers to feeding other animals, butterflies play an important role in nature. Protecting them helps protect the whole environment.</p>
+  </div>
+
+  <!-- REASONS -->
+  <h2 class="ribbon">Why Are Butterflies Important?</h2>
+  <section class="reasons">
+
+    <div class="reason r1">
+      <div class="badge">1</div>
+      <div>
+        <h3>They Help Pollinate Flowers</h3>
+        <p>Pollen can be carried from one flower to another when butterflies visit flowers. This helps plants make seeds and fruit.</p>
+      </div>
+    </div>
+
+    <div class="reason r2">
+      <div class="badge">2</div>
+      <div>
+        <h3>They Are Part of the Food Web</h3>
+        <p>Butterflies and caterpillars are food for some birds and other animals.</p>
+      </div>
+    </div>
+
+    <div class="reason r3">
+      <div class="badge">3</div>
+      <div>
+        <h3>They Support Biodiversity</h3>
+        <p>They are one of many living things that make an environment rich and balanced.</p>
+      </div>
+    </div>
+
+    <div class="reason r4">
+      <div class="badge">4</div>
+      <div>
+        <h3>They Help Us Observe Nature</h3>
+        <p>Changes in butterfly numbers and types can give scientists clues about the condition of habitats.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- WHY PROTECT -->
+  <div class="protect">
+    <img class="pic" src="images/footer-butterfly.png" alt="">
+    <div>
+      <h3>Why Should We Protect Them?</h3>
+      <p>Butterflies need safe places with flowering plants and host plants for caterpillars. Protecting their habitats helps butterflies and many other living things.</p>
+    </div>
+  </div>
+
+  <!-- REMINDERS -->
+  <h2 class="ribbon">Reminders: Be Kind to Nature</h2>
+  <section class="reminders">
+
+    <div class="reminder">
+      <span class="num">1</span>
+      <p>Observe butterflies gently. Do not chase, catch, or harm them.</p>
+    </div>
+
+    <div class="reminder">
+      <span class="num">2</span>
+      <p>Do not damage caterpillars, eggs, or the plants where they live.</p>
+    </div>
+
+    <div class="reminder">
+      <span class="num">3</span>
+      <p>Plant and care for suitable flowers and native plants with an adult's guidance.</p>
+    </div>
+
+    <div class="reminder">
+      <span class="num">4</span>
+      <p>Keep gardens and outdoor spaces clean. Put rubbish in the proper bin.</p>
+    </div>
+
+    <div class="reminder">
+      <span class="num">5</span>
+      <p>Avoid disturbing butterfly habitats and never remove living things from the wild just for fun.</p>
+    </div>
+
+    <div class="reminder">
+      <span class="num">6</span>
+      <p>Share what you learn and encourage others to care for nature.</p>
+    </div>
+
+  </section>
+
+  <!-- BIG REMINDER -->
+  <div class="bigreminder">
+    <span class="tag2">A Little Reminder</span>
+    <p>"Be kind to nature. Butterflies remind us that even small changes can make a big difference!"</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="bottom">Little steps. Big change. A healthier planet for tomorrow!</div>
+  </footer>
+
+</div>
+</body>
+</html>

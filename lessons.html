@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lessons · The Life Cycle of a Butterfly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#ff5fa2; --pink-soft:#ffe3ef; --navy:#2b2a6b; --purple:#8a4fd8;
+  --yellow-soft:#fff4c9; --blue-soft:#d9efff; --lav-soft:#e8defa; --green-soft:#dff5d4;
+  --orange:#f5a21b; --green:#3da34d; --text:#4a3f6b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Nunito","Trebuchet MS",sans-serif; color:var(--text);
+  background:linear-gradient(180deg,#ffe9f3 0,#fff6fb 30%,#fff 60%,#fdf0f8 100%);
+  line-height:1.4;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.display{font-family:"Baloo 2","Trebuchet MS",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:18px 18px 0}
+.pic{background:rgba(255,255,255,.55);border:2px dashed rgba(138,79,216,.35);border-radius:14px;object-fit:contain}
+
+/* nav */
+.nav{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;background:#fff;border-radius:999px;padding:6px 10px;box-shadow:0 3px 10px rgba(138,79,216,.12);width:fit-content;margin-left:auto}
+.nav a{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:.95rem;color:var(--purple)}
+.nav a.active{background:var(--pink);color:#fff}
+.nav img{width:24px;height:24px;border-radius:6px}
+
+/* page header */
+.pagehead{text-align:center;margin:24px 0 6px}
+.pagehead .eyebrow{display:inline-block;background:#ffe27a;color:var(--navy);font-weight:800;padding:6px 22px;border-radius:30px;transform:rotate(-2deg);font-family:"Baloo 2",sans-serif;font-size:1.05rem;letter-spacing:.5px}
+.pagehead h1{font-size:clamp(2rem,5vw,3rem);color:var(--navy);font-weight:800;line-height:1.05;margin-top:6px}
+.pagehead h1 span{color:var(--pink);text-shadow:2px 2px 0 #fff,4px 4px 0 #ffc2dc}
+.pagehead p.intro{max-width:720px;margin:10px auto 0;font-weight:600;font-size:1.02rem}
+
+/* section titles */
+.ribbon{display:table;margin:30px auto 16px;background:#b24fc4;color:#fff;font-size:clamp(1.2rem,3.2vw,1.6rem);font-weight:800;padding:6px 30px;border-radius:14px;transform:rotate(-1.5deg)}
+
+/* stage cards */
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stagecard{border-radius:24px;padding:16px 14px;text-align:center}
+.stagecard .pic{width:100%;aspect-ratio:1/1;margin-bottom:10px}
+.stagecard .badge{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;color:#fff;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.2rem;margin-bottom:4px}
+.stagecard h3{font-size:1.35rem;color:var(--navy);font-weight:800;line-height:1.1}
+.stagecard h3 small{font-size:.8rem;font-weight:600}
+.stagecard p{font-size:.93rem;font-weight:600;margin-top:6px}
+.sc1{background:var(--yellow-soft)} .sc1 .badge{background:var(--pink)}
+.sc2{background:var(--blue-soft)} .sc2 .badge{background:var(--orange)}
+.sc3{background:var(--lav-soft)} .sc3 .badge{background:var(--purple)}
+.sc4{background:var(--pink-soft)} .sc4 .badge{background:var(--green)}
+
+/* order banner */
+.orderbanner{background:#fff;border:3px dashed var(--purple);border-radius:20px;padding:14px 18px;text-align:center;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1rem,2.6vw,1.3rem);color:var(--navy);margin:18px 0}
+.orderbanner b{color:var(--pink)}
+
+/* videos */
+.videos{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:26px 0 6px}
+.video-card{background:#fff;border-radius:22px;padding:14px 14px 18px;box-shadow:0 8px 24px rgba(138,79,216,.12)}
+.video-card video{
+  width:100%;border-radius:16px;background:#000;
+  border:3px solid var(--lav-soft);
+}
+.video-card .vlabel{
+  display:inline-block;margin:12px auto 4px;background:var(--purple);color:#fff;
+  font-family:"Baloo 2",sans-serif;font-weight:800;font-size:.9rem;
+  padding:4px 16px;border-radius:30px;
+}
+.video-card .vtitle{text-align:center;font-family:"Baloo 2",sans-serif;font-weight:700;color:var(--navy);font-size:1.05rem;margin-top:2px}
+.video-card .vlabel-wrap{text-align:center}
+
+/* metamorphosis card */
+.metacard{background:#e6dcfa;border-radius:24px;padding:20px 24px;margin-top:22px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+.metacard .pic{width:90px;height:90px}
+.metacard h3{color:#5b34b3;font-size:1.5rem;font-weight:800}
+.metacard p{font-weight:600;margin-top:4px}
+
+/* fun facts */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fact{border-radius:20px;padding:16px 14px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.fact .pic{width:64px;height:64px}
+.fact h3{font-size:1rem;line-height:1.15;padding:8px 10px;border-radius:30px;background:rgba(255,255,255,.7);color:var(--navy);font-weight:700}
+.fact p{font-size:.92rem;font-weight:600;line-height:1.35}
+.f1{background:#ffe0ee}.f2{background:#fff3c4}.f3{background:#e6dcfa}.f4{background:#dcf5d2}.f5{background:#d6edff}.f6{background:#ffeedd}
+
+/* footer */
+.footer{margin-top:34px;background:#fde4f3;border-radius:30px 30px 0 0}
+.reminderbar{display:grid;grid-template-columns:auto auto 1fr auto;gap:18px;align-items:center;padding:16px 22px}
+.reminderbar .pic{width:80px;height:80px}
+.tag{border:3px dashed var(--purple);color:var(--purple);font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1.5rem;padding:6px 18px;border-radius:30px;transform:rotate(-2deg);background:#fff}
+.reminderbar p{font-weight:700;font-size:.95rem}
+.bottom{background:#a97be0;color:#fff;text-align:center;padding:12px;font-weight:700}
+
+/* responsive */
+@media(max-width:900px){
+  .stages{grid-template-columns:1fr 1fr}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .videos{grid-template-columns:1fr}
+  .metacard{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .reminderbar{grid-template-columns:1fr;text-align:center;justify-items:center}
+}
+@media(max-width:600px){
+  .stages{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr}
+  .nav{margin:0 auto;justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Main">
+    <a href="index.html">Home</a>
+    <a class="active" href="lessons.html">Lessons</a>
+    <a href="games.html">Games</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="activities.html">Activities</a>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="pagehead">
+    <span class="eyebrow">LESSONS · DISCOVER THE FOUR STAGES</span>
+    <h1>The Amazing <span>Metamorphosis</span></h1>
+    <p class="intro">A butterfly does not begin life with wings. It goes through four amazing stages before becoming the beautiful insect we see in gardens. A <b>life cycle</b> is the series of changes a living thing goes through as it grows and develops.</p>
+  </header>
+
+  <!-- 4 STAGES -->
+  <h2 class="ribbon">The Four Stages</h2>
+  <section class="stages">
+    <div class="stagecard sc1">
+      <img class="pic" src="images/stage-egg.png" alt="Eggs on a leaf">
+      <span class="badge">1</span>
+      <h3>Egg</h3>
+      <p>A butterfly begins as a tiny egg. The mother butterfly usually lays her eggs on a plant. The egg protects the baby butterfly as it develops inside.</p>
+    </div>
+    <div class="stagecard sc2">
+      <img class="pic" src="images/stage-larva.png" alt="Caterpillar on a leaf">
+      <span class="badge">2</span>
+      <h3>Larva <br><small>(Caterpillar)</small></h3>
+      <p>When the egg hatches, a caterpillar comes out. Its main job is to eat and grow. It eats leaves and sheds its old skin as its body becomes bigger.</p>
+    </div>
+    <div class="stagecard sc3">
+      <img class="pic" src="images/stage-pupa.png" alt="Chrysalis hanging from a branch">
+      <span class="badge">3</span>
+      <h3>Pupa <br><small>(Chrysalis)</small></h3>
+      <p>After growing, the caterpillar forms a pupa, often called a chrysalis. Inside, the insect changes as it develops into an adult butterfly.</p>
+    </div>
+    <div class="stagecard sc4">
+      <img class="pic" src="images/stage-adult.png" alt="Adult butterfly">
+      <span class="badge">4</span>
+      <h3>Adult Butterfly</h3>
+      <p>The adult butterfly comes out of the chrysalis. Its wings expand and dry before it flies. It can visit flowers, drink nectar, and reproduce to begin the cycle again.</p>
+    </div>
+  </section>
+
+  <div class="orderbanner">
+    Remember the order! &nbsp; <b>EGG → LARVA (CATERPILLAR) → PUPA (CHRYSALIS) → ADULT BUTTERFLY</b>
+  </div>
+
+  <!-- VIDEOS -->
+  <section class="videos">
+    <div class="video-card">
+      <video controls preload="metadata">
+        <source src="videos/butterfly-life-cycle-part1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="vlabel-wrap">
+        <span class="vlabel">Part 1</span>
+        <div class="vtitle">The Life Cycle of a Butterfly</div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <video controls preload="metadata">
+        <source src="videos/butterfly-life-cycle-part2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="vlabel-wrap">
+        <span class="vlabel">Part 2</span>
+        <div class="vtitle">The Life Cycle of a Butterfly</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METAMORPHOSIS -->
+  <div class="metacard">
+    <img class="pic" src="images/hero-butterfly.png" alt="Smiling butterfly">
+    <div>
+      <h3>How does the butterfly change?</h3>
+      <p>The changes a butterfly goes through are called <b>metamorphosis</b>. It is a special kind of development in which the animal’s body changes from one stage to another.</p>
+    </div>
+  </div>
+
+  <!-- FUN BUTTERFLY FACTS -->
+  <h2 class="ribbon">Fun Butterfly Facts!</h2>
+  <section class="facts">
+    <div class="fact f1">
+      <img class="pic" src="images/fact-did-you-know.png" alt="">
+      <h3>Did You Know?</h3>
+      <p>Butterflies taste with their feet! Their feet have special sensors that help them check whether a plant is suitable for laying eggs or feeding.</p>
+    </div>
+    <div class="fact f2">
+      <img class="pic" src="images/fact-lifespan.png" alt="">
+      <h3>How Long Do Butterflies Live?</h3>
+      <p>Some adult butterflies live only a short time, while others can live for several months. It depends on the species and conditions.</p>
+    </div>
+    <div class="fact f3">
+      <img class="pic" src="images/fact-food.png" alt="">
+      <h3>How Do Butterflies Find Food?</h3>
+      <p>Butterflies drink nectar. They use a long, tube-like mouthpart called a proboscis to sip liquid food from flowers.</p>
+    </div>
+    <div class="fact f4">
+      <img class="pic" src="images/fact-leaves.png" alt="">
+      <h3>Caterpillars Eat Leaves!</h3>
+      <p>Many caterpillars eat the leaves of particular host plants while they grow.</p>
+    </div>
+    <div class="fact f5">
+      <img class="pic" src="images/fact-flowers.png" alt="">
+      <h3>Butterflies Help Flowers Grow</h3>
+      <p>As butterflies visit flowers, pollen may stick to their bodies and be carried to other flowers. This helps pollination.</p>
+    </div>
+    <div class="fact f6">
+      <img class="pic" src="images/fact-scales.png" alt="Close-up of butterfly wing scales">
+      <h3>Butterfly Wings Have Tiny Scales</h3>
+      <p>The colorful patterns on butterfly wings are made by thousands of tiny scales.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="reminderbar">
+      <img class="pic" src="images/footer-butterfly.png" alt="">
+      <span class="tag">Reminder:</span>
+      <p>"Be kind to nature. Butterflies remind us that even the smallest changes can make a big difference!"</p>
+    </div>
+    <div class="bottom">Little steps. Big change. A healthier planet for tomorrow!</div>
+  </footer>
+
+</div>
+</body>
+</html>
